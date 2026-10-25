@@ -17,7 +17,7 @@
 
 **Local-first integrity control for AI agent instructions: `AGENTS.md`, `CLAUDE.md`, `SKILL.md` and the scripts they reference.**
 
-[Documentation](https://ntic-solution.github.io/syngard/) · [Documentation en français](https://ntic-solution.github.io/syngard/fr/) · [Quick start](#quick-start) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md)
+[Documentation](https://ntic-solution.github.io/syngard/) · [Roadmap](https://github.com/orgs/NTIC-Solution/projects/1) · [Documentation en français](https://ntic-solution.github.io/syngard/fr/) · [Quick start](#quick-start) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md)
 
 </div>
 
@@ -107,7 +107,8 @@ Found a vulnerability? Please report it privately: see [SECURITY.md](SECURITY.md
 
 ## Contributing
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md). Issues are grouped by
+Read [CONTRIBUTING.md](CONTRIBUTING.md). Work is planned on the public
+[Syngard Roadmap](https://github.com/orgs/NTIC-Solution/projects/1) project and grouped by
 [milestone](https://github.com/NTIC-Solution/syngard/milestones).
 
 ## License

@@ -39,7 +39,9 @@ git config user.signingkey ~/.ssh/<your-key>.pub
 ## Making a change
 
 1. Open or pick an issue describing the expected behavior, its milestone and
-   acceptance criteria.
+   acceptance criteria. Issues are tracked on the
+   [Syngard Roadmap](https://github.com/orgs/NTIC-Solution/projects/1) project
+   (Status: Backlog, Ready, In progress, In review, Done; Priority P0–P2; Area; Size).
 2. One branch per issue: `<type>/<number>-<topic>`, e.g. `feat/12-rules-engine`.
 3. [Conventional Commits](https://www.conventionalcommits.org/): `feat(core): …`,
    `fix(cli): …`, `docs: …`, `ci: …`.
