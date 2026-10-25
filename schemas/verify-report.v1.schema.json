@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/NTIC-Solution/syngard/schemas/verify-report.v1.schema.json",
+  "title": "Syngard verify report v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "integrity",
+    "approval",
+    "profile",
+    "baseline_digest",
+    "observed_digest",
+    "changes",
+    "coverage_issues"
+  ],
+  "properties": {
+    "integrity": {
+      "enum": [
+        "match",
+        "drift",
+        "unknown"
+      ]
+    },
+    "approval": {
+      "const": "not_evaluated"
+    },
+    "profile": {
+      "const": "observe"
+    },
+    "baseline_digest": {
+      "$ref": "manifest.v1.schema.json#/$defs/sha256"
+    },
+    "observed_digest": {
+      "anyOf": [
+        {
+          "$ref": "manifest.v1.schema.json#/$defs/sha256"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "changes": {
+      "type": "array",
+      "items": {
+        "$ref": "diff-report.v1.schema.json#/$defs/change"
+      }
+    },
+    "coverage_issues": {
+      "type": "array",
+      "items": {
+        "$ref": "scan-report.v1.schema.json#/$defs/coverageIssue"
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "integrity": {
+            "const": "unknown"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "observed_digest": {
+            "type": "null"
+          },
+          "coverage_issues": {
+            "minItems": 1
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "observed_digest": {
+            "$ref": "manifest.v1.schema.json#/$defs/sha256"
+          },
+          "coverage_issues": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "integrity": {
+            "const": "match"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "changes": {
+            "maxItems": 0
+          }
+        }
+      }
+    }
+  ]
+}

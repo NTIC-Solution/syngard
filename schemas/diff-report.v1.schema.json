@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/NTIC-Solution/syngard/schemas/diff-report.v1.schema.json",
+  "title": "Syngard diff report v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "complete",
+    "changes",
+    "coverage_issues"
+  ],
+  "properties": {
+    "complete": {
+      "type": "boolean"
+    },
+    "changes": {
+      "type": "array",
+      "items": {
+        "$ref": "diff-report.v1.schema.json#/$defs/change"
+      }
+    },
+    "coverage_issues": {
+      "type": "array",
+      "items": {
+        "$ref": "scan-report.v1.schema.json#/$defs/coverageIssue"
+      }
+    }
+  },
+  "$defs": {
+    "change": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "change",
+            "entry"
+          ],
+          "properties": {
+            "change": {
+              "const": "added"
+            },
+            "entry": {
+              "$ref": "manifest.v1.schema.json#/properties/entries/items"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "change",
+            "entry"
+          ],
+          "properties": {
+            "change": {
+              "const": "removed"
+            },
+            "entry": {
+              "$ref": "manifest.v1.schema.json#/properties/entries/items"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "change",
+            "before",
+            "after"
+          ],
+          "properties": {
+            "change": {
+              "const": "modified"
+            },
+            "before": {
+              "$ref": "manifest.v1.schema.json#/properties/entries/items"
+            },
+            "after": {
+              "$ref": "manifest.v1.schema.json#/properties/entries/items"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "complete": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "coverage_issues": {
+            "maxItems": 0
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "coverage_issues": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}

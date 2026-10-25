@@ -1,0 +1,40 @@
+[workspace]
+resolver = "3"
+members = ["crates/syngard-core", "crates/syngard-cli"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/NTIC-Solution/syngard"
+authors = ["NTIC Solution"]
+publish = false
+
+[workspace.dependencies]
+syngard-core = { path = "crates/syngard-core" }
+clap = { version = "4.6.7", features = ["derive"] }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.151"
+sha2 = "0.11.0"
+thiserror = "2.0.21"
+tempfile = "3.27.0"
+boon = "=0.6.1"
+proptest = { version = "=1.12.0", default-features = false, features = ["std"] }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+missing_debug_implementations = "warn"
+
+[workspace.lints.clippy]
+unwrap_used = "deny"
+expect_used = "warn"
+panic = "deny"
+indexing_slicing = "warn"
+dbg_macro = "deny"
+todo = "deny"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = "symbols"

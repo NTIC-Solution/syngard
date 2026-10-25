@@ -1,0 +1,248 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/NTIC-Solution/syngard/schemas/scan-report.v1.schema.json",
+  "title": "Syngard scan report v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "complete",
+    "manifest",
+    "coverage_issues"
+  ],
+  "properties": {
+    "complete": {
+      "type": "boolean"
+    },
+    "manifest": {
+      "anyOf": [
+        {
+          "$ref": "manifest.v1.schema.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "coverage_issues": {
+      "type": "array",
+      "items": {
+        "$ref": "scan-report.v1.schema.json#/$defs/coverageIssue"
+      }
+    }
+  },
+  "$defs": {
+    "coverageIssue": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "reason"
+          ],
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "reason": {
+              "const": "symlink"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "reason",
+            "links"
+          ],
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "reason": {
+              "const": "hardlink"
+            },
+            "links": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18446744073709551615
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "reason"
+          ],
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "reason": {
+              "const": "special_file"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "reason"
+          ],
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "reason": {
+              "const": "non_utf8_path"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "reason",
+            "size",
+            "limit"
+          ],
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "reason": {
+              "const": "too_large"
+            },
+            "size": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18446744073709551615
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18446744073709551615
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "reason",
+            "limit"
+          ],
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "reason": {
+              "const": "too_deep"
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18446744073709551615
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "reason",
+            "limit"
+          ],
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "reason": {
+              "const": "too_many_files"
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18446744073709551615
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "reason"
+          ],
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "reason": {
+              "const": "changed_during_read"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "reason",
+            "kind"
+          ],
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "reason": {
+              "const": "io"
+            },
+            "kind": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "complete": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "coverage_issues": {
+            "maxItems": 0
+          },
+          "manifest": {
+            "$ref": "manifest.v1.schema.json"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "coverage_issues": {
+            "minItems": 1
+          },
+          "manifest": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ]
+}

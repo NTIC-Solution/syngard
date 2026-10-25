@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/NTIC-Solution/syngard/schemas/manifest.v1.schema.json",
+  "title": "Syngard bundle manifest v1",
+  "description": "Baseline written by `syngard scan --output`. `digest` is SHA-256 over the compact JSON of {format, entries} (entries sorted by path, fields in declared order). A baseline detects drift; it is not an approval.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["digest", "format", "entries"],
+  "properties": {
+    "digest": { "$ref": "#/$defs/sha256" },
+    "format": { "const": "syngard.manifest/v1" },
+    "entries": {
+      "type": "array",
+      "description": "Strictly sorted by path bytes.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "kind", "size", "sha256"],
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Relative path with '/' separators; no empty, '.' or '..' segments, no backslash.",
+            "pattern": "^([^./\\\\][^/\\\\]*|\\.[^./\\\\][^/\\\\]*|\\.\\.[^/\\\\]+)(/([^./\\\\][^/\\\\]*|\\.[^./\\\\][^/\\\\]*|\\.\\.[^/\\\\]+))*$"
+          },
+          "kind": { "enum": ["instruction", "script", "reference", "config", "other"] },
+          "size": { "type": "integer", "minimum": 0 },
+          "sha256": { "$ref": "#/$defs/sha256" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}
