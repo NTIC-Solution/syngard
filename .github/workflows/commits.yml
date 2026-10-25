@@ -1,0 +1,54 @@
+# Every commit must be authored by the maintainer and carry a valid SSH
+# signature from a key listed in .github/allowed_signers.
+name: Commits
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  signed-and-authored:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify authors and signatures
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          signers="$RUNNER_TEMP/allowed_signers"
+          if git cat-file -e "$BASE_SHA^{commit}" 2>/dev/null; then
+            range="$BASE_SHA..$HEAD_SHA"
+            # Trust the signer list from the base, never from the change itself.
+            # The head copy is used only to bootstrap a base that has none.
+            git show "$BASE_SHA:.github/allowed_signers" > "$signers" 2>/dev/null \
+              || git show "$HEAD_SHA:.github/allowed_signers" > "$signers"
+          else
+            range="$HEAD_SHA"
+            git show "$HEAD_SHA:.github/allowed_signers" > "$signers"
+          fi
+          git config gpg.format ssh
+          git config gpg.ssh.allowedSignersFile "$signers"
+          allowed=$(cut -d' ' -f1 "$signers" | sort -u)
+          failed=0
+          for c in $(git rev-list "$range"); do
+            email=$(git log -1 --format=%ae "$c")
+            if ! printf '%s\n' "$allowed" | grep -qxF -- "$email"; then
+              echo "::error::$c author $email is not an allowed author"
+              failed=1
+            fi
+            if ! git verify-commit "$c" >/dev/null 2>&1; then
+              echo "::error::$c has no valid signature from an allowed key"
+              failed=1
+            fi
+          done
+          exit "$failed"
