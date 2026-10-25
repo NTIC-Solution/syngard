@@ -2,3 +2,16 @@
 # (in minutes), and never run dependency install scripts.
 minimumReleaseAge: 20160
 onlyBuiltDependencies: []
+
+# Security fixes pinned ahead of upstream ranges. An entry here is removed once
+# the parent package depends on a fixed version.
+overrides:
+  # GHSA alerts for undici < 8.12.2 (DoS, SRI bypass), via astro > unifont.
+  undici: 8.12.2
+  # Quadratic selector parsing in postcss-selector-parser < 7.1.6, via
+  # starlight > expressive-code > postcss-nested.
+  postcss-selector-parser: 7.1.6
+
+# Exception to the release-age rule, for the security fix above only.
+minimumReleaseAgeExclude:
+  - undici
