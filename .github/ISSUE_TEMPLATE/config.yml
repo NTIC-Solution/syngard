@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/NTIC-Solution/syngard/security/advisories/new
+    about: Private report. Do not open a public issue.
+  - name: Documentation
+    url: https://ntic-solution.github.io/syngard/
+    about: User guide, CLI reference and security model.

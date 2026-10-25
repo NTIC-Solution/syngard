@@ -1,0 +1,18 @@
+#!/bin/sh
+# Installed by `just setup`. Blocks commits that leak secrets or skip formatting.
+set -eu
+
+if ! command -v gitleaks >/dev/null 2>&1; then
+    echo "pre-commit: gitleaks not found; install it (see CONTRIBUTING.md)" >&2
+    exit 1
+fi
+gitleaks git --staged --redact --no-banner
+
+if [ "$(git config --get commit.gpgsign)" != "true" ]; then
+    echo "pre-commit: commit.gpgsign must be true (see CONTRIBUTING.md)" >&2
+    exit 1
+fi
+
+if git diff --cached --name-only | grep -q '\.rs$'; then
+    cargo fmt --all --check
+fi

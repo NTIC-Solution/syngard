@@ -1,0 +1,14 @@
+# Normalize text to LF in the repository.
+* text=auto eol=lf
+
+# Fixtures are hashed byte for byte: never convert line endings or encodings.
+tests/fixtures/** -text
+
+# Binary assets
+*.png binary
+*.ico binary
+*.woff2 binary
+
+# Lockfiles are generated: collapsed in diffs on GitHub, still reviewed.
+Cargo.lock linguist-generated=true
+docs/pnpm-lock.yaml linguist-generated=true

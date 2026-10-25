@@ -1,0 +1,21 @@
+name: Bug report
+description: syngard behaves incorrectly
+labels: ["type: bug"]
+body:
+  - type: markdown
+    attributes:
+      value: "Do not include secrets. For a vulnerability, use private reporting instead."
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction
+      description: Exact commands, an inert file tree, version or commit, operating system.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual behavior
+      description: Output and exit code you got.
+    validations:
+      required: true

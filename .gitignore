@@ -1,0 +1,69 @@
+# Rust build output
+/target/
+**/*.rs.bk
+*.profraw
+*.profdata
+/fuzz/target/
+/fuzz/corpus/
+/fuzz/artifacts/
+/mutants.out*/
+
+# Documentation site (Astro / pnpm)
+node_modules/
+/docs/dist/
+/docs/.astro/
+.pnpm-store/
+npm-debug.log*
+pnpm-debug.log*
+
+# Local baselines and reports produced while experimenting
+/baseline*.json
+/*.sarif
+
+# Secrets and credentials: never committed
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+id_rsa*
+id_ecdsa*
+id_ed25519*
+.netrc
+.npmrc
+credentials*.json
+*.kdbx
+
+# Editors and operating systems
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Personal assistant, agent and session state
+.claude/
+CLAUDE.local.md
+.codex/
+.cursor/
+.aider*
+.continue/
+.windsurf/
+.orca/
+.gemini/
+.copilot/
+.history/
+.direnv/
+.envrc
+
+# Logs and temporary files
+*.log
+*.tmp
+/tmp/
