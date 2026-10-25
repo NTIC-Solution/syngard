@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440" role="img" aria-labelledby="title desc">
+<title id="title">Syngard — integrity control for AI agent instructions</title>
+<desc id="desc">Animated banner. A guarded gate inspired by Syn, the Norse goddess who keeps the door shut against those who must not enter. Instruction files stream toward the gate; approved hashes pass through, a tampered script is flagged as drift.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#05070f"/><stop offset=".55" stop-color="#0a0f22"/><stop offset="1" stop-color="#120a26"/></linearGradient>
+  <radialGradient id="auraL"><stop offset="0" stop-color="#22d3ee" stop-opacity=".35"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/></radialGradient>
+  <radialGradient id="auraR"><stop offset="0" stop-color="#a855f7" stop-opacity=".35"/><stop offset="1" stop-color="#a855f7" stop-opacity="0"/></radialGradient>
+  <radialGradient id="rune"><stop offset="0" stop-color="#fde68a"/><stop offset=".5" stop-color="#f59e0b" stop-opacity=".6"/><stop offset="1" stop-color="#f59e0b" stop-opacity="0"/></radialGradient>
+  <linearGradient id="ttl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#c4b5fd"/><stop offset="1" stop-color="#67e8f9"/></linearGradient>
+  <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+  <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#22d3ee" stop-opacity="0"/><stop offset=".5" stop-color="#22d3ee" stop-opacity=".8"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/></linearGradient>
+  <linearGradient id="gate" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e1b4b"/><stop offset="1" stop-color="#0b1026"/></linearGradient>
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#1e293b" stroke-width=".6"/></pattern>
+  <clipPath id="titleClip"><text x="600" y="348" text-anchor="middle" font-family="'JetBrains Mono','Fira Code',ui-monospace,Menlo,Consolas,monospace" font-size="78" font-weight="800" letter-spacing="14">SYNGARD</text></clipPath>
+  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <style>
+    .mono{font-family:'JetBrains Mono','Fira Code',ui-monospace,Menlo,Consolas,monospace}
+    .file{font-size:13px;fill:#94a3b8}
+    .ok{fill:#34d399}.bad{fill:#f87171}
+    .flow{animation:flow 6s linear infinite}
+    .flow.d1{animation-delay:-1.5s}.flow.d2{animation-delay:-3s}.flow.d3{animation-delay:-4.5s}
+    @keyframes flow{0%{transform:translateX(0);opacity:0}10%{opacity:1}45%{transform:translateX(330px);opacity:1}55%{transform:translateX(330px);opacity:1}90%{opacity:1}100%{transform:translateX(700px);opacity:0}}
+    .blocked{animation:blocked 6s linear infinite;animation-delay:-.75s}
+    @keyframes blocked{0%{transform:translateX(0);opacity:0}10%{opacity:1}45%{transform:translateX(330px)}50%{transform:translateX(322px)}53%{transform:translateX(330px)}56%{transform:translateX(324px)}60%{transform:translateX(330px);opacity:1}100%{transform:translateX(330px);opacity:0}}
+    .alarm{animation:alarm 6s linear infinite;animation-delay:-.75s;opacity:0}
+    @keyframes alarm{0%,44%{opacity:0}48%,80%{opacity:1}100%{opacity:0}}
+    .pulse{animation:pulse 3s ease-in-out infinite;transform-origin:600px 150px}
+    @keyframes pulse{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+    .spin{animation:spin 24s linear infinite;transform-origin:600px 150px}
+    .spin.rev{animation-duration:36s;animation-direction:reverse}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .scan{animation:scan 3s ease-in-out infinite}
+    @keyframes scan{0%,100%{transform:translateY(0)}50%{transform:translateY(150px)}}
+    .sweep{animation:sweep 5s ease-in-out infinite}
+    @keyframes sweep{0%{transform:translateX(-500px)}60%,100%{transform:translateX(700px)}}
+    .blink{animation:blink 1.1s steps(1) infinite}
+    @keyframes blink{50%{opacity:0}}
+    .rise{animation:rise 1.2s ease-out both}
+    .rise.r2{animation-delay:.25s}.rise.r3{animation-delay:.5s}
+    @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+    @media (prefers-reduced-motion:reduce){*{animation:none!important}.alarm{opacity:1}}
+  </style>
+</defs>
+
+<rect width="1200" height="440" fill="url(#bg)"/>
+<rect width="1200" height="440" fill="url(#grid)" opacity=".55"/>
+<circle cx="230" cy="150" r="260" fill="url(#auraL)"/>
+<circle cx="980" cy="160" r="260" fill="url(#auraR)"/>
+
+<!-- incoming instruction files -->
+<g class="mono file">
+  <g class="flow"><rect x="60" y="72" width="150" height="26" rx="5" fill="#0f172a" stroke="#334155"/><text x="72" y="90">AGENTS.md</text><circle cx="196" cy="85" r="4" class="ok"/></g>
+  <g class="flow d1"><rect x="60" y="112" width="150" height="26" rx="5" fill="#0f172a" stroke="#334155"/><text x="72" y="130">SKILL.md</text><circle cx="196" cy="125" r="4" class="ok"/></g>
+  <g class="blocked"><rect x="60" y="152" width="150" height="26" rx="5" fill="#1f0d12" stroke="#f87171"/><text x="72" y="170" fill="#fca5a5">scripts/run.sh</text><circle cx="196" cy="165" r="4" class="bad"/></g>
+  <g class="flow d2"><rect x="60" y="192" width="150" height="26" rx="5" fill="#0f172a" stroke="#334155"/><text x="72" y="210">CLAUDE.md</text><circle cx="196" cy="205" r="4" class="ok"/></g>
+  <g class="flow d3"><rect x="60" y="232" width="150" height="26" rx="5" fill="#0f172a" stroke="#334155"/><text x="72" y="250">config.toml</text><circle cx="196" cy="245" r="4" class="ok"/></g>
+</g>
+
+<!-- the gate -->
+<g>
+  <circle cx="600" cy="150" r="118" fill="none" stroke="#6366f1" stroke-opacity=".35" stroke-width="1.5" stroke-dasharray="4 10" class="spin"/>
+  <circle cx="600" cy="150" r="98" fill="none" stroke="#22d3ee" stroke-opacity=".4" stroke-width="1" stroke-dasharray="40 14 4 14" class="spin rev"/>
+  <path d="M540 230V110a60 60 0 0 1 120 0v120z" fill="url(#gate)" stroke="#818cf8" stroke-width="2"/>
+  <path d="M560 230V114a40 40 0 0 1 80 0v116" fill="none" stroke="#4f46e5" stroke-width="1.2" stroke-opacity=".8"/>
+  <line x1="600" y1="74" x2="600" y2="230" stroke="#4f46e5" stroke-width="1" stroke-opacity=".6"/>
+  <rect x="545" y="78" width="110" height="3" fill="url(#beam)" class="scan" filter="url(#glow)"/>
+  <!-- rune of Syn: a closed door ward -->
+  <g class="pulse" filter="url(#glow)">
+    <circle cx="600" cy="150" r="26" fill="url(#rune)" opacity=".5"/>
+    <path d="M600 132v36M588 140l12 -8 12 8M588 160l12 8 12 -8" fill="none" stroke="#fde68a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</g>
+
+<!-- drift alarm -->
+<g class="alarm mono">
+  <rect x="394" y="186" width="136" height="22" rx="4" fill="#450a0a" stroke="#f87171"/>
+  <text x="404" y="201" font-size="12" fill="#fecaca">✕ drift detected</text>
+</g>
+
+<!-- verified output -->
+<g class="mono" font-size="13">
+  <g transform="translate(760 70)">
+    <rect width="380" height="186" rx="10" fill="#0b1222" fill-opacity=".85" stroke="#334155"/>
+    <circle cx="18" cy="16" r="5" fill="#f87171"/><circle cx="36" cy="16" r="5" fill="#fbbf24"/><circle cx="54" cy="16" r="5" fill="#34d399"/>
+    <text x="18" y="50" fill="#a5b4fc">$ <tspan fill="#e2e8f0">syngard verify ./skill --baseline b.json</tspan></text>
+    <text x="18" y="78" fill="#fca5a5">~ scripts/run.sh  3f9a…e1 → 07c2…9b</text>
+    <text x="18" y="104" fill="#e2e8f0">integrity: <tspan fill="#f87171" font-weight="700">drift</tspan></text>
+    <text x="18" y="128" fill="#e2e8f0">approval:  <tspan fill="#fbbf24">not evaluated</tspan></text>
+    <text x="18" y="152" fill="#e2e8f0">profile:   <tspan fill="#67e8f9">observe</tspan></text>
+    <text x="18" y="176" fill="#64748b">exit 2<tspan class="blink" fill="#e2e8f0"> ▌</tspan></text>
+  </g>
+</g>
+
+<!-- title -->
+<g class="rise">
+  <text x="600" y="348" text-anchor="middle" class="mono" font-size="78" font-weight="800" letter-spacing="14" fill="url(#ttl)">SYNGARD</text>
+  <g clip-path="url(#titleClip)"><rect x="0" y="278" width="220" height="90" fill="url(#shine)" class="sweep" opacity=".55"/></g>
+</g>
+<text x="600" y="384" text-anchor="middle" class="mono rise r2" font-size="16" fill="#cbd5e1" letter-spacing="2">Know when the instructions your AI agents obey have changed.</text>
+<text x="600" y="414" text-anchor="middle" class="mono rise r3" font-size="12" fill="#64748b" letter-spacing="3">SHA-256 BUNDLES · DRIFT DETECTION · LOCAL-FIRST · OPEN SOURCE</text>
+</svg>

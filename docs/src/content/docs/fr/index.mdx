@@ -1,0 +1,37 @@
+---
+title: Syngard
+description: Savoir quand les instructions de vos agents IA ont changé.
+template: splash
+hero:
+  tagline: Contrôle d'intégrité local-first pour AGENTS.md, CLAUDE.md, SKILL.md et les scripts qu'ils référencent. Détecte la dérive octet par octet, hors ligne, sans rien exécuter.
+  image:
+    file: ../../../assets/banner.svg
+  actions:
+    - text: Démarrage rapide
+      link: /syngard/fr/getting-started/quick-start/
+      icon: right-arrow
+    - text: Modèle de sécurité
+      link: /syngard/fr/concepts/security-model/
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+:::caution[Pré-alpha]
+Seul le profil **observe** existe aujourd'hui. Syngard détecte et signale la dérive ; il n'empêche pas encore un agent de lire des instructions non approuvées.
+:::
+
+<CardGrid stagger>
+	<Card title="Au bit près" icon="seti:lock">
+		SHA-256 sur les octets bruts, sans normalisation. Un octet modifié, un script ajouté ou un fichier supprimé change le digest du bundle.
+	</Card>
+	<Card title="Résultats honnêtes" icon="warning">
+		Une inspection incomplète (symlink, fichier spécial, limite de taille, entrée illisible) est signalée `unknown`, jamais comme conforme.
+	</Card>
+	<Card title="Inerte par conception" icon="approve-check">
+		Les fichiers inspectés sont des données hostiles : jamais exécutés, jamais téléchargés, jamais suivis. Les noms hostiles sont échappés à l'affichage.
+	</Card>
+	<Card title="Scriptable" icon="seti:json">
+		Codes de sortie stables et rapports JSON versionnés avec schémas publiés, prêts pour la CI.
+	</Card>
+</CardGrid>

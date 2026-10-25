@@ -1,0 +1,37 @@
+---
+title: Syngard
+description: Know when the instructions your AI agents obey have changed.
+template: splash
+hero:
+  tagline: Local-first integrity control for AGENTS.md, CLAUDE.md, SKILL.md and the scripts they reference. Detect drift byte for byte, offline, without executing anything.
+  image:
+    file: ../../assets/banner.svg
+  actions:
+    - text: Quick start
+      link: /syngard/getting-started/quick-start/
+      icon: right-arrow
+    - text: Security model
+      link: /syngard/concepts/security-model/
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+:::caution[Pre-alpha]
+Only the **observe** profile exists today. Syngard detects and reports drift; it does not yet block an agent from reading unapproved instructions.
+:::
+
+<CardGrid stagger>
+	<Card title="Byte-exact" icon="seti:lock">
+		SHA-256 over raw bytes, no normalization. A single changed byte, an added script or a removed file changes the bundle digest.
+	</Card>
+	<Card title="Honest results" icon="warning">
+		An incomplete inspection (symlink, special file, size limit, unreadable entry) is reported as `unknown`, never as a match.
+	</Card>
+	<Card title="Inert by design" icon="approve-check">
+		Inspected files are hostile data: never executed, never fetched, never followed. Hostile names are escaped on output.
+	</Card>
+	<Card title="Scriptable" icon="seti:json">
+		Stable exit codes and versioned JSON reports with published schemas, ready for CI.
+	</Card>
+</CardGrid>

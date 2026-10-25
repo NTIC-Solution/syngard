@@ -1,0 +1,4 @@
+# Supply-chain policy: only resolve releases published at least 14 days ago
+# (in minutes), and never run dependency install scripts.
+minimumReleaseAge: 20160
+onlyBuiltDependencies: []
